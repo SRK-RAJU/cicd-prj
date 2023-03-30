@@ -38,7 +38,7 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 8040
+  port: 89
 
 ingress:
   enabled: false
