@@ -40,6 +40,8 @@ spec:
           livenessProbe:
             tcpSocket:
               port: http
+          command: [ "sleep" ]
+          args: [ "infinity" ]
           readinessProbe:
             tcpSocket:
               port: http
