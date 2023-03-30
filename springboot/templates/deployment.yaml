@@ -38,15 +38,23 @@ spec:
               containerPort: 8080
               protocol: TCP
           livenessProbe:
+            enabled:true
             tcpSocket:
-              port: http
-              initialDelaySeconds: 60
-              periodSeconds: 30
+              port: 8080
+              initialDelaySeconds: 120
+              periodSeconds: 10
+              timeoutSeconds: 1
+              successThreshold: 1
+              failureThreshold: 3
           readinessProbe:
+            enabled:true
             tcpSocket:
-              port: http
-            initialDelaySeconds: 60
-            periodSeconds: 30
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
