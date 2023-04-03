@@ -33,8 +33,26 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: [ "sleep" ]
-          args: [ "infinity" ]
+#           ports:
+#             - name: http
+#               containerPort: 8080
+#               protocol: TCP
+#           livenessProbe:
+#             tcpSocket:
+#               port: http
+#             initialDelaySeconds: 150
+#             periodSeconds: 30
+#             timeoutSeconds: 50
+#             successThreshold: 1
+#             failureThreshold: 5
+#           readinessProbe:
+#             tcpSocket:
+#               port: http
+#             initialDelaySeconds: 150
+#             periodSeconds: 10
+#             timeoutSeconds: 50
+#             successThreshold: 1
+#             failureThreshold: 5
           ports:
             - name: http
               containerPort: 8080
@@ -42,20 +60,9 @@ spec:
           livenessProbe:
             tcpSocket:
               port: http
-            initialDelaySeconds: 150
-            periodSeconds: 30
-            timeoutSeconds: 50
-            successThreshold: 1
-            failureThreshold: 5
           readinessProbe:
             tcpSocket:
               port: http
-            initialDelaySeconds: 150
-            periodSeconds: 10
-            timeoutSeconds: 50
-            successThreshold: 1
-            failureThreshold: 5
-            
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
