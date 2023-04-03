@@ -35,16 +35,16 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 89
+              containerPort: 80
               protocol: TCP
           livenessProbe:
             tcpSocket:
               port: http
-          command: [ "sleep" ]
-          args: [ "infinity" ]
           readinessProbe:
             tcpSocket:
               port: http
+          command: [ "sleep" ]
+          args: [ "infinity" ]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
